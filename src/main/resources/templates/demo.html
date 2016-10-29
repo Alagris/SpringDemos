@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>DEMO</title>
+</head>
+<body>
+	version: 4
+	<br /> mapped_method=
+	<a th:text="${mapped_method == null} ? 'demo' : ${mapped_method}">thymeleaf not working</a>
+	<br /> requests_sent_so_far=
+	<a th:text="${requests_sent_so_far == null} ? 'default' : ${requests_sent_so_far}">thymeleaf not working</a>
+	<br /> request_parameters=
+	<a th:text="${request_parameters == null} ? 'default' : ${request_parameters}">thymeleaf not working</a>
+	<br /> request_path=
+	<a th:text="${ request_path == null} ? 'default' : ${request_path}">thymeleaf not working</a>
+	<br /> full_path=
+	<a th:text="${full_path == null} ? 'default' : ${full_path}">thymeleaf not working</a>
+	<br /> back:
+	<a href="http://localhost:8080/">click me</a>
+</body>
+</html>

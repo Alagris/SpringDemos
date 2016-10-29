@@ -1,0 +1,10 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="thymeleaf/layout :: headerFragment">
+<!-- replaced with fragment content -->
+<!-- 'thymeleaf/layout' refers to /thymeleaf/layout.html on the filesystem -->
+</head>
+
+<body>
+	<a th:text="${requests_sent_so_far}"></a>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver"> 
+		<property name="prefix" value="classpath:/src/main/resources/templates/" 
+		/> <property name="suffix" value=".html" /> <property name="templateMode" 
+		value="HTML5" /> </bean> <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine"> 
+		<property name="templateResolver" ref="templateResolver" /> </bean> -->
+
+	<bean id="hashPassword" class="net.alagris.src.crypto.HashPassword">
+		<property name="saltLength" value="#{64 * 8}" />
+		<property name="hashLength" value="#{64 * 8}" />
+		<property name="iterations" value="1000" />
+	</bean>
+
+</beans>
+
+
