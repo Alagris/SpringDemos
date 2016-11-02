@@ -12,8 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ThisGameApplicationTests {
-	private static final Logger log = LoggerFactory.getLogger(ThisGameApplicationTests.class);
+public class DemosApplicationTests {
+	private static final Logger log = LoggerFactory.getLogger(DemosApplicationTests.class);
 
 	// @Autowired
 	// HashPassword hashPassword;

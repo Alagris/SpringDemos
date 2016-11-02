@@ -18,12 +18,12 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @SpringBootApplication
 @ImportResource("classpath:/Beans.xml")
-public class ThisGameApplication implements CommandLineRunner {
+public class DemosApplication implements CommandLineRunner {
 
-    private static final Logger log = LoggerFactory.getLogger(ThisGameApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(DemosApplication.class);
 
     public static void main(String[] args) {
-	SpringApplication.run(ThisGameApplication.class, args);
+	SpringApplication.run(DemosApplication.class, args);
 
     }
 
