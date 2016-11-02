@@ -1,6 +1,6 @@
 package net.alagris.src;
 
-import java.util.Scanner;
+import java.io.File;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,69 +20,71 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 @ImportResource("classpath:/Beans.xml")
 public class ThisGameApplication implements CommandLineRunner {
 
-	private static final Logger log = LoggerFactory.getLogger(ThisGameApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(ThisGameApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(ThisGameApplication.class, args);
-		
-	}
+    public static void main(String[] args) {
+	SpringApplication.run(ThisGameApplication.class, args);
 
-	
-	
-	@Bean
-	public ViewResolver viewResolver() {
-		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-		templateResolver.setTemplateMode("XHTML");
-		templateResolver.setPrefix("classpath:/src/main/resources/templates/");
-		templateResolver.setSuffix(".html");
-		SpringTemplateEngine engine = new SpringTemplateEngine();
-		engine.setTemplateResolver(templateResolver);
+    }
 
-		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-		viewResolver.setTemplateEngine(engine);
-		return viewResolver;
-	}
+    @Bean
+    public ViewResolver viewResolver() {
+	ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+	templateResolver.setTemplateMode("XHTML");
+	templateResolver.setPrefix("classpath:/src/main/resources/templates/");
+	templateResolver.setSuffix(".html");
+	SpringTemplateEngine engine = new SpringTemplateEngine();
+	engine.setTemplateResolver(templateResolver);
 
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+	ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+	viewResolver.setTemplateEngine(engine);
+	return viewResolver;
+    }
 
-	@Override
-	public void run(String... strings) throws Exception {
-		logInfo();
-//		Thread t = new Thread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				Scanner sc = new Scanner(System.in);
-//				while(true){
-//					
-//					
-//					
-//				}
-//				sc.close();
-//			}
-//		});
-	}
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
-	private void logInfo() throws Exception {
-		///////////////////////////////////
-		// LOGGING USEFUL INFO
-		///////////////////////////////////
-		log.info("App started! Logging useful info...");
-		//////////////
-		// DATABASE
-		//////////////
-		log.info("Database info:");
-		log.info("\tURL=\t\t" + jdbcTemplate.getDataSource().getConnection().getMetaData().getURL());
-		log.info("\tUser=\t\t" + jdbcTemplate.getDataSource().getConnection().getMetaData().getUserName());
-		log.info("\tDriver=\t\t" + jdbcTemplate.getDataSource().getConnection().getMetaData().getDriverName());
-		log.info("\tProduct=\t" + jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductName());
-		log.info("\tVersion=\t"
-				+ jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductVersion());
+    @Autowired
+    File persistentDir;
 
-		///////////////////////////////////
-		// LOGGING USEFUL INFO FINISH
-		///////////////////////////////////
-		log.info("..logging useful info finished!");
-	}
+    @Override
+    public void run(String... strings) throws Exception {
+	logInfo();
+	persistentDir.mkdirs();
+	// Thread t = new Thread(new Runnable() {
+	//
+	// @Override
+	// public void run() {
+	// Scanner sc = new Scanner(System.in);
+	// while(true){
+	//
+	//
+	//
+	// }
+	// sc.close();
+	// }
+	// });
+    }
+
+    private void logInfo() throws Exception {
+	///////////////////////////////////
+	// LOGGING USEFUL INFO
+	///////////////////////////////////
+	log.info("App started! Logging useful info...");
+	//////////////
+	// DATABASE
+	//////////////
+	log.info("Database info:");
+	log.info("\tURL=\t\t" + jdbcTemplate.getDataSource().getConnection().getMetaData().getURL());
+	log.info("\tUser=\t\t" + jdbcTemplate.getDataSource().getConnection().getMetaData().getUserName());
+	log.info("\tDriver=\t\t" + jdbcTemplate.getDataSource().getConnection().getMetaData().getDriverName());
+	log.info("\tProduct=\t" + jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductName());
+	log.info("\tVersion=\t"
+		+ jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductVersion());
+
+	///////////////////////////////////
+	// LOGGING USEFUL INFO FINISH
+	///////////////////////////////////
+	log.info("..logging useful info finished!");
+    }
 }

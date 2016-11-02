@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
+	xmlns:mvc="http://www.springframework.org/schema/mvc">
 
 	<!-- <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver"> 
 		<property name="prefix" value="classpath:/src/main/resources/templates/" 
@@ -14,6 +19,13 @@
 		<property name="hashLength" value="#{64 * 8}" />
 		<property name="iterations" value="1000" />
 	</bean>
+	
+	<bean id="persistentDir" class="java.io.File">
+		<constructor-arg type="java.lang.String" value="/my/tmp/persistentUploads/"/>
+	</bean>
+
+	<mvc:resources mapping="/resources/**"
+		location="/resources/, classpath:/src/main/resources/resources/" />
 
 </beans>
 

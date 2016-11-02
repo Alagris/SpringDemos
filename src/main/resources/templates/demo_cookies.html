@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>DEMO</title>
+<!-- Take a look at Beans.xml to see how resources are configured -->
+<script type="text/javascript" src="/demo_cookies.js"></script>
+</head>
+<body>
+	Cookies:
+	<br /> Foo:
+	<p th:text="${foo == null} ? 'unknown' : ${mapped_method}">
+		thymeleaf not working</p>
+	<br />All:
+
+	<p id="all_cookies">nothing</p>
+	<input type="text" id="cookiesIn" />
+	<button type="button" onclick="setCookies();">Ready!</button>
+	<p>
+		<a href="/">back</a>
+	</p>
+	<p>
+		<a href="/demo">demo</a>
+	</p>
+	<p>
+		<a href="/demo/a?p=1&amp;g=er">demo1</a>
+	</p>
+	<p>
+		<a href="/demo/b/c">demo2</a>
+	</p>
+	<p>
+		<a href="/demo/b/c/de/f?lk=243&amp;1=xyz&amp;q=q">demo3</a>
+	</p>
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"></meta>
+<title>Th+js</title>
+
+<script th:inline="javascript">
+	var myVariable = 'th:inline in head';
+	console.log(myVariable);
+</script>
+
+
+<th:block layout:fragment="script">
+	var myVariable = 'layout:fragment in head';//will not work
+	console.log(myVariable);
+</th:block>
+</head>
+<body>
+	<script th:inline="javascript">
+		var myVariable = 'th:inline';
+		console.log(myVariable);
+	</script>
+
+
+	<th:block layout:fragment="script">
+		var myVariable = 'layout:fragment';//will not work
+		console.log(myVariable);
+	</th:block>
+</body>
+</html>

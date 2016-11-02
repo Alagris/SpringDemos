@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"></meta>
+<title>Insert title here</title>
+
+<script th:inline="javascript">
+	//NOTICE:
+	//as we embed javascript inside HTML header
+	//so it's very important to take caution about
+	//http://stackoverflow.com/a/16328808/3900373
+	//special XML characters:
+
+	//< the start of a tag.
+    //> the end of a tag.
+	//" the start and end of an attribute value.
+	//' the alternative start and end of an attribute value.
+	//& the start of an entity (which ends with ;).
+
+	var ajax = {}
+	ajax.x = function createXMLHTTPObject() {
+		try {
+			return new XMLHttpRequest()
+		} catch (e) {
+		}
+		try {
+			return new ActiveXObject("Msxml3.XMLHTTP")
+		} catch (e) {
+		}
+		try {
+			return new ActiveXObject("Msxml2.XMLHTTP.6.0")
+		} catch (e) {
+		}
+		try {
+			return new ActiveXObject("Msxml2.XMLHTTP.3.0")
+		} catch (e) {
+		}
+		try {
+			return new ActiveXObject("Msxml2.XMLHTTP")
+		} catch (e) {
+		}
+		try {
+			return new ActiveXObject("Microsoft.XMLHTTP")
+		} catch (e) {
+		}
+		console.log("ERROR! Coult not initialize AJAX!");
+		return null;
+	};
+	ajax.send = function(url, callback, method, data, async) {
+		if (async === undefined) {
+			async = true;
+		}
+		var x = ajax.x();
+		x.open(method, url, async);
+		x.onreadystatechange = function() {
+			if (x.readyState == 4) {
+				callback(x.responseText)
+			}
+		};
+		if (method == 'POST') {
+			x.setRequestHeader('Content-type',
+					'application/x-www-form-urlencoded');
+		}
+		x.send(data)
+	};
+
+	ajax.get = function(url, data, callback, async) {
+		var query = [];
+		for ( var key in data) {
+			query.push(encodeURIComponent(key) + '='
+					+ encodeURIComponent(data[key]));
+		}
+		ajax.send(url + (query.length ? '?' + query.join('&amp;') : ''),
+				callback, 'GET', null, async)
+	};
+
+	ajax.post = function(url, data, callback, async) {
+		var query = [];
+		for ( var key in data) {
+			query.push(encodeURIComponent(key) + '='
+					+ encodeURIComponent(data[key]));
+		}
+		ajax.send(url, callback, 'POST', query.join('&amp;'), async)
+	};
+
+	document.addEventListener('DOMContentLoaded', function() {
+		ajax.get("http://rest-service.guides.spring.io/greeting", null,
+				function(data) {
+					document.getElementById('ajax-input-1').text = data;
+				});
+		ajax.get("../demo1-rest", null, function(data) {
+			document.getElementById('ajax-input-2').text = data;
+		});
+		ajax.get("../demo1-rest?re=lol", null, function(data) {
+			document.getElementById('ajax-input-3').text = data;
+		});
+		ajax.get("../demo1-rest?c=666", null, function(data) {
+			document.getElementById('ajax-input-4').text = data;
+		});
+
+		ajax.get("../demo1-rest?re=XD&amp;c=typeMisMatch", null,
+				function(data) {
+					document.getElementById('ajax-input-5').text = data;
+				});
+	});
+</script>
+</head>
+<body>
+	<p>
+		<br />AJAX test: <a id="ajax-input-1">li</a>
+	</p>
+	<p>
+		<br />AJAX+rest test-invalid: <a id="ajax-input-2">invalid</a>
+	</p>
+	<p>
+		<br />AJAX+rest test1: <a id="ajax-input-3">li</a>
+	</p>
+	<p>
+		<br />AJAX+rest test2: <a id="ajax-input-4">li</a>
+	</p>
+	<p>
+		<br />AJAX+rest test3-type mismatch: <a id="ajax-input-5">li</a>
+	</p>
+</body>
+</html>
