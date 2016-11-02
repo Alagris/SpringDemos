@@ -1,1 +1,0 @@
-Hello!. This file is a resource inside classpath /src/main/resources/resources
