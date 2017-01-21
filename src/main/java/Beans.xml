@@ -13,6 +13,19 @@
 		/> <property name="suffix" value=".html" /> <property name="templateMode" 
 		value="HTML5" /> </bean> <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine"> 
 		<property name="templateResolver" ref="templateResolver" /> </bean> -->
+	
+	<!-- This bean replaces variables in ${} with system environmental variables -->
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="searchSystemEnvironment" value="true" />
+	</bean>
+	
+	<!-- Example that demonstrates power of propertyPlaceholderConfigurer-->
+	<bean id="path" class="java.lang.String">
+		<constructor-arg type="java.lang.String"  value="${PATH}"/>
+	</bean>
+
 
 	<bean id="hashPassword" class="net.alagris.src.crypto.HashPassword">
 		<property name="saltLength" value="#{64 * 8}" />

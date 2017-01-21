@@ -30,6 +30,9 @@ public class DemoController {
     public String demo() {
 	return "demo";
     }
+    
+    
+    
 
     @RequestMapping(value = "/demo/{path:.+}", method = RequestMethod.GET)
     public ModelAndView demo1(@PathVariable("path") String detailedPath,
@@ -40,6 +43,10 @@ public class DemoController {
 	model.addAttribute("request_path", detailedPath);
 	return new ModelAndView("demo", model);
     }
+    
+    
+    
+    
 
     @RequestMapping(value = "/demo/{path1}/{path2}", method = RequestMethod.GET)
     public ModelAndView demo2(@PathVariable("path1") String p1, @PathVariable("path2") String p2, ModelMap model) {
@@ -49,6 +56,9 @@ public class DemoController {
 	return new ModelAndView("demo", model);
     }
 
+    
+    
+    
     @RequestMapping(value = "/demo/{path:.+}/**", method = RequestMethod.GET)
     public ModelAndView demo3(@PathVariable("path") String detailedPath,
 	    @RequestParam Map<String, String> allRequestParams, ModelMap model, HttpServletRequest request) {
@@ -62,6 +72,8 @@ public class DemoController {
 
     private static final Logger log = LoggerFactory.getLogger(DemoController.class);
 
+    
+    
     @RequestMapping(value = "/demo_void.html", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK) // this annotation is the key for
 					   // void controllers
